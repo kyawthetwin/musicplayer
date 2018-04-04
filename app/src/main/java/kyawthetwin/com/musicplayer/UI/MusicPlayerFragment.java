@@ -1,6 +1,7 @@
 package kyawthetwin.com.musicplayer.UI;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import kyawthetwin.com.musicplayer.R;
 public class MusicPlayerFragment extends Fragment {
 
 
+    MediaPlayer mediaPlayer;
     public MusicPlayerFragment() {
         // Required empty public constructor
     }
@@ -33,6 +35,12 @@ public class MusicPlayerFragment extends Fragment {
           /*  mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);*/
         }
+
+        init();
+    }
+
+    private void init(){
+        
     }
 
     @Override
