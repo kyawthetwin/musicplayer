@@ -1,5 +1,6 @@
 package kyawthetwin.com.musicplayer.Adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import kyawthetwin.com.musicplayer.R;
+import kyawthetwin.com.musicplayer.UI.MusicPlayer.MusicPlayerActivity;
 
 /**
  * Created by kyawthetwin on 4/3/18.
@@ -20,6 +22,12 @@ import kyawthetwin.com.musicplayer.R;
 public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.MyViewHolder> {
 
     ArrayList<File> musicList;
+
+    Context context;
+
+    public MusicListAdapter(Context context) {
+        this.context = context;
+    }
 
     @Override
     public MusicListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,21 +47,28 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.MyVi
     public void onBindViewHolder(MusicListAdapter.MyViewHolder holder, int position) {
 
         holder.txtSongName.setText(musicList.get(position).getName());
+
     }
 
     @Override
     public int getItemCount() {
-        return musicList != null? musicList.size() : 0 ;
+        return musicList != null ? musicList.size() : 0;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.txt_songName)
         TextView txtSongName;
 
         public MyViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this,view);
+            ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            context.startActivity(MusicPlayerActivity.newIntent(context,getAdapterPosition(),musicList));
         }
     }
 }

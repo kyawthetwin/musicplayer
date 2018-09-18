@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +75,7 @@ public class MusicListFragment extends Fragment implements MusicListContract.Vie
 
 
     private void setMusicListRecyclerView(){
-        musicListAdapter = new MusicListAdapter();
+        musicListAdapter = new MusicListAdapter(context());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         rcvMusicList.setLayoutManager(mLayoutManager);
         rcvMusicList.setItemAnimator(new DefaultItemAnimator());
@@ -88,6 +87,7 @@ public class MusicListFragment extends Fragment implements MusicListContract.Vie
     private void findSong(){
         presenter.findSong(Environment.getExternalStorageDirectory());
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -119,6 +119,7 @@ public class MusicListFragment extends Fragment implements MusicListContract.Vie
 
     @Override
     public Context context() {
-        return null;
+        return getActivity().getApplicationContext();
     }
+
 }
